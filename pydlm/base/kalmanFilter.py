@@ -151,9 +151,7 @@ class kalmanFilter:
 
             model.state = model.prediction.state + correction * err
 
-            model.sysVar = model.noiseVar[0, 0] / lastNoiseVar[0, 0] * \
-                           (model.prediction.sysVar - np.dot(correction, correction.T) * \
-                            model.prediction.obsVar[0, 0])
+            model.sysVar = (model.prediction.sysVar - np.dot(correction, correction.T) * model.prediction.obsVar[0, 0])
 
             model.obs = np.dot(model.evaluation, model.state)
             model.obsVar = np.dot(np.dot(model.evaluation, model.sysVar), \
